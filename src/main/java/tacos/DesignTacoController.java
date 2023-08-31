@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -84,5 +85,13 @@ public class DesignTacoController {
 		return ingredients.stream()
 				.filter(x -> x.getType().equals(type))
 				.collect(Collectors.toList());
+	}
+	
+	@PostMapping
+	public String processTaco(Taco taco, @ModelAttribute TacoOrder tacoOrder) {
+		tacoOrder.addTaco(taco);
+		log.info("Processing taco: {}", taco);
+		
+		return "redirect:/orders/current";
 	}
 }

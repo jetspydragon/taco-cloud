@@ -1,1 +1,8 @@
 @charset "ISO-8859-1";
+.grid {
+	display: flex;
+}
+
+.ingredient-group {
+	flex: 50%;
+}
